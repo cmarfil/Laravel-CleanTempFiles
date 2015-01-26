@@ -6,6 +6,8 @@ Create command from console:
 php artisan command:make cleanTmp
 ```
 
+This will create the file app/commands/cleanTmp.php
+
 On fire function paste:
 ```
 	public function fire()
@@ -45,9 +47,9 @@ On fire function paste:
 	}
 ```
 
-On app/start/artisan.php insert:
+On app/start/artisan.php add:
 ```
-Artisan::add(new maintenance);
+Artisan::add(new cleanTmp);
 ```
 
 Note that two configuration items are used:
@@ -55,7 +57,16 @@ Note that two configuration items are used:
 //Email log
 Config::get('settings.contacts.developer')
 //Tmp path
-Config::get('settings.contacts.developer')
+Config::get('settings.system.tmp_path')
 ```
 
 * The deletion of files is recursive.
+
+###Cronjob###
+```
+sudo crontab -e
+```
+And add the following line to run the task once daily at 00h
+```
+00 00 * * * php /var/www/project/artisan command:cleanTmp
+```
