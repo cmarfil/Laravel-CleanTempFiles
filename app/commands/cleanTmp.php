@@ -1,13 +1,40 @@
-# Laravel-CleanTempFiles
-Delete temporal files with Laravel Command
+<?php
 
-Create command from console:
-```
-php artisan command:make cleanTmp
-```
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-On fire function paste:
-```
+class cleanTmp extends Command {
+
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'command:cleanTmp';
+
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Clean temp files.';
+
+	/**
+	 * Create a new command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
+	 * Execute the console command.
+	 *
+	 * @return mixed
+	 */
 	public function fire()
 	{
 		$this->info('Deleting all temp files');
@@ -43,19 +70,5 @@ On fire function paste:
 			}
 		}
 	}
-```
 
-On app/start/artisan.php insert:
-```
-Artisan::add(new maintenance);
-```
-
-Note that two configuration items are used:
-```
-//Email log
-Config::get('settings.contacts.developer')
-//Tmp path
-Config::get('settings.contacts.developer')
-```
-
-* The deletion of files is recursive.
+}
