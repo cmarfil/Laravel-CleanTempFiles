@@ -9,7 +9,7 @@ php artisan command:make cleanTmp
 This will create the file app/commands/cleanTmp.php
 
 On fire function paste:
-```
+```php
 	public function fire()
 	{
 		$this->info('Deleting all temp files');
@@ -48,12 +48,12 @@ On fire function paste:
 ```
 
 On app/start/artisan.php add:
-```
+```php
 Artisan::add(new cleanTmp);
 ```
 
 Note that two configuration items are used:
-```
+```php
 //Email log
 Config::get('settings.contacts.developer')
 //Tmp path
@@ -63,10 +63,10 @@ Config::get('settings.system.tmp_path')
 * The deletion of files is recursive.
 
 ###Cronjob###
-```
+```bash
 sudo crontab -e
 ```
 And add the following line to run the task once daily at 00h
-```
+```bash
 00 00 * * * php /var/www/project/artisan command:cleanTmp
 ```
